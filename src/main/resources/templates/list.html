@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${appName}"></title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2>Danh sách bác sĩ</h2>
+
+    <form th:action="@{/doctors/search}" method="get" class="form-inline">
+        <div class="form-group">
+            <input type="text" name="phone" class="form-control" placeholder="Tìm theo SĐT">
+        </div>
+        <button type="submit" class="btn btn-primary">Tìm</button>
+        <a th:href="@{/doctors}" class="btn btn-default">Reset</a>
+    </form>
+
+    <br>
+
+    <a th:href="@{/doctors/add}" class="btn btn-success">+ Thêm bác sĩ</a>
+
+    <br><br>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Mã</th>
+            <th>Tên</th>
+            <th>Chuyên khoa</th>
+            <th>Kinh nghiệm</th>
+            <th>SĐT</th>
+            <th>Địa chỉ</th>
+            <th>Ngày vào làm</th>
+            <th>Avatar</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="d : ${doctors}">
+            <td th:text="${d.id}"></td>
+            <td th:text="${d.name}"></td>
+            <td th:text="${d.specialization}"></td>
+            <td th:text="${d.experience}"></td>
+            <td th:text="${d.phone}"></td>
+            <td th:text="${d.address}"></td>
+            <td th:text="${d.startDate}"></td>
+            <td>
+                <img th:src="@{'/images/' + ${d.avatar}}" width="80" height="80">
+            </td>
+            <td>
+                <a th:href="@{'/doctors/edit/' + ${d.id}}" class="btn btn-warning btn-sm">Sửa</a>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(doctors)}">
+            <td colspan="9" class="text-center text-danger">Không có dữ liệu</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
