@@ -1,0 +1,2 @@
+Spring Boot quản lý các cấu hình mặc định thông qua cơ chế “Default Properties” được định nghĩa sẵn trong framework
+Danh sách đầy đủ các cấu hình này có thể tìm thấy trong tài liệu chính thức của Spring Boot tại phần Common Application Properties
